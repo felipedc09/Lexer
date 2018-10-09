@@ -41,6 +41,7 @@ def t_error(t):
     t.lexer.skip(1)
 
 lex.lex() # Build the lexer
+
 data = ''
 for exp in readLinesFile('expresiones.in'):
     data+=exp
