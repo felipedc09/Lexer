@@ -22,7 +22,17 @@ def t_NAME(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     if t.value.lower() in reserved :
         t.type = reserved[ t.value.lower() ]
+        t.value = switchValue (t.type)
     return t
+
+def switchValue(x):
+    return {
+        'PLUS': '+',
+        'MINUS': '-',
+        'TIMES': '*',
+        'DIVIDE': '/',
+        'EQUALS' : '='
+    }[x]
 
 def t_NUMBER(t):
     r'\d+'
