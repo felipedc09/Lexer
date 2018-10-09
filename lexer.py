@@ -3,14 +3,26 @@ from utilidades import readLinesFile, writeInFile, appendInFile
 import ply.lex as lex
 
 tokens = [ 'NAME','NUMBER','PLUS','MINUS','TIMES','DIVIDE', 'EQUALS' ]
-
+reserved = {
+    'suma' : 'PLUS',
+    'resta' : 'MINUS',
+    'multiplicacion' : 'TIMES',
+    'division' : 'DIVIDE',
+    
+}
 t_ignore = ' \t'
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_EQUALS = r'='
-t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
+
+
+def t_NAME(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    if t.value.lower() in reserved :
+        t.type = reserved[ t.value.lower() ]
+    return t
 
 def t_NUMBER(t):
     r'\d+'
